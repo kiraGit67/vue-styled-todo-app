@@ -1,6 +1,8 @@
 <template>
   <todo-header :headerTitle="headerTitle" />
   <main class="main">
+    <add-todo-form @addToDo="addNewTodo" />
+    <!--
     <form class="todo-input" @submit.prevent="addNewTodo()">
       <input
         class="todo-input__input"
@@ -13,7 +15,7 @@
         Add
       </button>
     </form>
-
+    -->
     <section class="filter-and-options">
       <h2>Filter & Options</h2>
       <div class="radio-container" id="radio-container">
@@ -76,14 +78,15 @@
 </template>
 
 <script>
-import { nanoid } from "nanoid";
 import TodoHeader from "@/components/TodoHeader.vue";
+import AddTodoForm from "@/components/AddTodoForm.vue";
 import TodoList from "@/components/TodoList.vue";
 
 export default {
   name: "App",
   components: {
     TodoHeader,
+    AddTodoForm,
     TodoList,
   },
   data() {
@@ -105,7 +108,6 @@ export default {
           checked: false,
         },
       ],
-      newToDo: "",
       filterState: "",
       filteredTodos: [],
       headerTitle: "ToDo APP",
@@ -114,27 +116,21 @@ export default {
   mounted() {
     this.filteredTodos = this.todos;
   },
-  computed: {
-    isToDoDouble() {
+  methods: {
+    isToDoDouble(item) {
       return this.todos
         .map((todo) => {
           return todo.description;
         })
-        .includes(this.newToDo);
+        .includes(item);
     },
-  },
-  methods: {
-    addNewTodo() {
-      console.log(this.newToDo);
-
-      if (!this.isToDoDouble && this.newToDo !== "") {
-        this.todos.push({
-          id: nanoid(),
-          description: this.newToDo,
-          checked: false,
-        });
+    addNewTodo(addedToDo) {
+      if (
+        addedToDo.description !== "" &&
+        !this.isToDoDouble(addedToDo.description)
+      ) {
+        this.todos.push(addedToDo);
       }
-      this.newToDo = "";
     },
     filterToDos() {
       console.log(this.filterState);
@@ -237,29 +233,6 @@ body {
 }
 
 .radio-button:focus {
-  border: 0.1em solid var(--yellow);
-}
-
-.todo-input {
-  display: flex;
-}
-
-.todo-input .todo-input__input {
-  margin-right: 1em;
-}
-
-.todo-input__input {
-  all: unset;
-  display: inline-block;
-  flex-grow: 1;
-  width: auto;
-  background-color: white;
-  padding: 0.5em;
-  border: 0.1em solid transparent;
-  border-radius: 0.3em;
-}
-
-.todo-input__input:focus {
   border: 0.1em solid var(--yellow);
 }
 
