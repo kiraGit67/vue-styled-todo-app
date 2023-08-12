@@ -1,7 +1,5 @@
 <template>
-  <header class="header">
-    <h1 class="header__title">Todo App</h1>
-  </header>
+  <todo-header :headerTitle="headerTitle" />
   <main class="main">
     <form class="todo-input" @submit.prevent="addNewTodo()">
       <input
@@ -79,11 +77,13 @@
 
 <script>
 import { nanoid } from "nanoid";
+import TodoHeader from "@/components/TodoHeader.vue";
 import TodoList from "@/components/TodoList.vue";
 
 export default {
   name: "App",
   components: {
+    TodoHeader,
     TodoList,
   },
   data() {
@@ -108,6 +108,7 @@ export default {
       newToDo: "",
       filterState: "",
       filteredTodos: [],
+      headerTitle: "ToDo APP",
     };
   },
   mounted() {
@@ -188,19 +189,6 @@ body {
 
 .done {
   text-decoration: line-through;
-}
-
-.header {
-  text-align: center;
-  background-color: var(--pink);
-  padding: 3rem 1rem;
-  color: white;
-  margin-bottom: 1rem;
-}
-
-.header__title {
-  margin: 0;
-  text-shadow: 2px 2px var(--light-blue), 4px 4px var(--yellow);
 }
 
 .button {
