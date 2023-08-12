@@ -3,7 +3,7 @@
     <h1 class="header__title">Todo App</h1>
   </header>
   <main class="main">
-    <section class="todo-input">
+    <form class="todo-input" @submit.prevent="addNewTodo()">
       <input
         class="todo-input__input"
         id="todo-input"
@@ -11,14 +11,10 @@
         placeholder="Get sh*t done!"
         v-model="newToDo"
       />
-      <button
-        class="todo-input__button button"
-        id="add-button"
-        @click="addNewTodo()"
-      >
+      <button type="submit" class="todo-input__button button" id="add-button">
         Add
       </button>
-    </section>
+    </form>
 
     <section class="filter-and-options">
       <h2>Filter & Options</h2>
