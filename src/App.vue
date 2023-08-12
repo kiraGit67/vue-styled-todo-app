@@ -104,20 +104,29 @@ export default {
       filteredTodos: [],
     };
   },
-  computed: {},
   mounted() {
     this.filteredTodos = this.todos;
+  },
+  computed: {
+    isToDoDouble() {
+      return this.todos
+        .map((todo) => {
+          return todo.description;
+        })
+        .includes(this.newToDo);
+    },
   },
   methods: {
     addNewTodo() {
       console.log(this.newToDo);
 
-      this.todos.push({
-        id: nanoid(),
-        description: this.newToDo,
-        checked: false,
-      });
-
+      if (!this.isToDoDouble && this.newToDo !== "") {
+        this.todos.push({
+          id: nanoid(),
+          description: this.newToDo,
+          checked: false,
+        });
+      }
       this.newToDo = "";
     },
     filterToDos() {
