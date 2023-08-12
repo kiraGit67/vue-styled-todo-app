@@ -79,6 +79,8 @@
 </template>
 
 <script>
+import { nanoid } from "nanoid";
+
 export default {
   name: "App",
   components: {},
@@ -115,7 +117,7 @@ export default {
       console.log(this.newToDo);
 
       this.todos.push({
-        id: Math.random(1, 50),
+        id: nanoid(),
         description: this.newToDo,
         checked: false,
       });
