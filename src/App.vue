@@ -51,7 +51,10 @@
         />
         <label for="radio-done">Done</label>
       </div>
-      <delete-button :buttonText="deleteButtonText" />
+      <delete-button
+        :buttonText="deleteButtonText"
+        @deleteToDo="removeDoneToDos()"
+      />
       <!--
       <button class="button" id="delete-button">Remove Done Todos</button>
       -->
@@ -151,6 +154,12 @@ export default {
       } else {
         this.filteredTodos = this.todos;
       }
+    },
+    removeDoneToDos() {
+      this.todos = this.todos.filter((todo) => {
+        return todo.checked === false;
+      });
+      this.filteredTodos = this.todos;
     },
   },
 };
