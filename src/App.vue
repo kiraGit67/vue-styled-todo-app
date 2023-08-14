@@ -51,7 +51,10 @@
         />
         <label for="radio-done">Done</label>
       </div>
+      <delete-button :buttonText="deleteButtonText" />
+      <!--
       <button class="button" id="delete-button">Remove Done Todos</button>
+      -->
     </section>
 
     <section class="todos">
@@ -81,6 +84,7 @@
 import TodoHeader from "@/components/TodoHeader.vue";
 import AddTodoForm from "@/components/AddTodoForm.vue";
 import TodoList from "@/components/TodoList.vue";
+import DeleteButton from "@/components/DeleteButton.vue";
 
 export default {
   name: "App",
@@ -88,6 +92,7 @@ export default {
     TodoHeader,
     AddTodoForm,
     TodoList,
+    DeleteButton,
   },
   data() {
     return {
@@ -111,6 +116,7 @@ export default {
       filterState: "",
       filteredTodos: [],
       headerTitle: "ToDo APP",
+      deleteButtonText: "Remove Done ToDo's",
     };
   },
   mounted() {
@@ -186,7 +192,7 @@ body {
 .done {
   text-decoration: line-through;
 }
-
+/**/
 .button {
   all: unset;
   display: block;
